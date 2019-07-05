@@ -195,6 +195,7 @@ func makeDeploymentSpec(request requests.CreateFunctionRequest, existingSecrets 
 				},
 				Spec: apiv1.PodSpec{
 					NodeSelector: nodeSelector,
+					SchedulerName: "skippy-scheduler",
 					Containers: []apiv1.Container{
 						{
 							Name:  request.Service,

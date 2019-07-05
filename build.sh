@@ -1,6 +1,15 @@
 #!/bin/sh
-
 make build
+docker tag openfaas/faas-netes:latest alexrashed/faas-netes-skippy:0.1-amd64
+docker push alexrashed/faas-netes-skippy:0.1-amd64
+make build-arm64
+docker tag openfaas/faas-netes:latest-arm64 alexrashed/faas-netes-skippy:0.1-arm64
+docker push alexrashed/faas-netes-skippy:0.1-arm64
+make build-armhf
+docker tag openfaas/faas-netes:latest-armhf alexrashed/faas-netes-skippy:0.1-armhf
+docker push alexrashed/faas-netes-skippy:0.1-armhf
+docker manifest create --amend alexrashed/faas-netes-skippy:0.1 alexrashed/faas-netes-skippy:0.1-amd64 alexrashed/faas-netes-skippy:0.1-arm64 alexrashed/faas-netes-skippy:0.1-armhf
+docker manifest push alexrashed/faas-netes-skippy:0.1
 
 # os="$(uname -s)"
 
